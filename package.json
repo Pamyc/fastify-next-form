@@ -6,7 +6,8 @@
   "scripts": {
     "dev": "tsx server/index.ts",
     "build": "next build && tsc -p tsconfig.server.json",
-    "start": "next build && tsc -p tsconfig.server.json && node dist/server/index.js"
+    "start": "node dist/server/index.js",
+    "postinstall": "npm run build"
   },
   "dependencies": {
     "@fastify/cors": "^9.0.1",
@@ -14,15 +15,15 @@
     "fastify": "^4.26.2",
     "next": "^13.5.0",
     "react": "^18.3.1",
-    "react-dom": "^18.3.1"
+    "react-dom": "^18.3.1",
+    "typescript": "^5.6.3"
   },
   "devDependencies": {
     "@types/node": "^20.11.30",
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "tslib": "^2.6.3",
-    "tsx": "^4.19.0",
-    "typescript": "^5.6.3"
+    "tsx": "^4.19.0"
   },
   "engines": {
     "node": ">=18"
