@@ -12,7 +12,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ru">
       <body>
         <div className="container">
-          <header className="flex gap-3">
+          <header style={{display:'flex', gap:12}}>
             <Link href="/">Главная</Link>
             <Link href="/form">Форма</Link>
             <a href="/healthz" target="_blank" rel="noreferrer">/healthz</a>

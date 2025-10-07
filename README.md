@@ -1,32 +1,14 @@
-# Fastify + Next.js (TypeScript) — Starter
+# Fastify + Next.js (TypeScript) — Timeweb-ready
 
-Один сервис на Node.js 18+/22: Fastify (бекенд) + Next.js (фронтенд) в одном приложении.
-Готов для деплоя на **Timeweb Cloud → Backend → Fastify (Node.js 22)**.
+- Один сервис: Fastify (API) + Next.js (UI) через `@fastify/nextjs`
+- Проверка: `/form` (форма), `/api/submit` (API), `/healthz` (health)
 
-## Что есть
-- **/form** — простая страница с формой (Next.js App Router)
-- **POST /api/submit** — обработчик формы (Fastify)
-- **/healthz** — health-check
+## Timeweb Cloud (Backend → Fastify Node.js 22)
+ENV:
+- PORT=3000
+- NODE_ENV=production
 
-## Запуск в Timeweb Cloud
-Переменные окружения (в панели):
+Start command:
 ```
-PORT=3000
-NODE_ENV=production
-```
-
-Команда запуска:
-```
-npm run start
-```
-
-(Скрипт `prestart` автоматически соберёт Next и сервер TypeScript).
-
-## Локально (опционально)
-```bash
-npm i
-npm run dev    # Fastify+Next dev (через tsx)
-# или production:
-npm run build
 npm run start
 ```

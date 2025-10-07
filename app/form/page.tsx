@@ -35,7 +35,7 @@ export default function FormPage() {
       <form onSubmit={onSubmit} className="mt-3">
         <label>Сообщение</label>
         <input
-          className="input mt-2"
+          className="input mt-3"
           value={message}
           onChange={(e) => setMessage(e.target.value)}
           placeholder="Введите текст..."
@@ -48,13 +48,13 @@ export default function FormPage() {
       {response && (
         <div className="mt-4">
           <b>Ответ API:</b>
-          <pre className="mt-2">{response}</pre>
+          <pre className="mt-3">{response}</pre>
         </div>
       )}
       {error && (
         <div className="mt-4" style={{ color: '#ef4444' }}>
           <b>Ошибка:</b>
-          <pre className="mt-2">{error}</pre>
+          <pre className="mt-3">{error}</pre>
         </div>
       )}
     </div>

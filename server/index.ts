@@ -7,44 +7,44 @@ const port = Number(process.env.PORT || 3000);
 const host = process.env.HOST || '0.0.0.0';
 
 async function build() {
-  const app = Fastify({
-    logger: true,
-  });
+  const app = Fastify({ logger: true });
 
-  // CORS (можно отключить, если один домен)
+  // CORS (можно ограничить origin конкретным доменом)
   await app.register(fastifyCors, { origin: true });
 
   // Подключаем Next.js через плагин
   await app.register(fastifyNext, { dev: !isProd });
 
-  // Примитивные API-роуты
+  // API
   app.get('/healthz', async () => ({ status: 'ok', uptime: process.uptime() }));
-
   app.post('/api/submit', async (request, reply) => {
     const body = (request.body || {}) as { message?: string };
     const msg = (body.message || '').toString().trim();
     return reply.send({ ok: true, message: `Принято: ${msg || 'пусто'}` });
   });
 
-  // Все остальные маршруты отдаём Next (SSR/статик)
+  // Страницы Next
   app.after(() => {
-    // fastify.next('/*') — wildcard для страниц Next
-    (app as any).next('/*');
+    (app as any).next('/');
+    (app as any).next('/form');
+    (app as any).next('/_next/*');
+    (app as any).next('/**'); // общий вайлдкард
   });
 
   return app;
 }
 
-build().then(app => {
-  app.listen({ port, host }, (err, address) => {
-    if (err) {
-      app.log.error(err);
-      process.exit(1);
-    }
-    app.log.info(`🚀 Server ready on ${address} (prod=${isProd})`);
+build()
+  .then((app) => {
+    app.listen({ port, host }, (err, address) => {
+      if (err) {
+        app.log.error(err);
+        process.exit(1);
+      }
+      app.log.info(`🚀 Server ready on ${address} (prod=${isProd})`);
+    });
+  })
+  .catch((err) => {
+    console.error('Fatal during bootstrap', err);
+    process.exit(1);
   });
-}).catch((err) => {
-  // eslint-disable-next-line no-console
-  console.error('Fatal during bootstrap', err);
-  process.exit(1);
-});
